@@ -1,0 +1,24 @@
+service: serverless--undertakeit
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: java11
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: us-east-1
+  timeout: 28
+  tracing:
+    lambda: true
+
+package:
+  artifact: build/distributions/consumer--lab-fafka-1.0.0.zip
+
+functions:
+  consume:
+    handler: com.lab.TopicListener.handler.TopicListener
+    events:
+      - msk:
+          arn: arn:aws:kafka:us-east-1:235646823787:cluster/demo-cluster-1/e0e123c0-b851-4e4b-9db3-2c52c33cf138-21
+          topic: topic.test
+    tracing: Active

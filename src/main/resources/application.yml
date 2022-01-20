@@ -1,0 +1,23 @@
+server:
+  port: 5001
+
+spring:
+  application:
+    name: api--lab-kafka
+
+  kafka:
+    bootstrap-servers: b-1.demo-cluster-1.hkgzxj.c21.kafka.us-east-1.amazonaws.com:9092, b-2.demo-cluster-1.hkgzxj.c21.kafka.us-east-1.amazonaws.com:9092, b-3.demo-cluster-1.hkgzxj.c21.kafka.us-east-1.amazonaws.com:9092
+    # bootstrap-servers: 127.0.0.1:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      # value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      group-id: api--lab-kafka
+      auto-offset-reset: latest
+    message:
+      topic: topic.test
+
+auto:
+  create:
+    topics:
+      enable: true
